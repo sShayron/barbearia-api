@@ -6,7 +6,7 @@ const middlewares = require('./routes/middlewares');
 const loginRoutes = require('./routes/login');
 const registerRoutes = require('./routes/register');
 const connectionString =
-  "mongodb+srv://user-1:user1pass@cluster0.1w3ls.mongodb.net/barbearia-db?retryWrites=true&w=majorityg";
+  "MONGODBCONNECTIONSTRING";
 
 mongoose.connect(connectionString);
 
