@@ -5,8 +5,8 @@ const mongoose = require("mongoose");
 const middlewares = require('./routes/middlewares');
 const loginRoutes = require('./routes/login');
 const registerRoutes = require('./routes/register');
-const connectionString =
-  "MONGODBCONNECTIONSTRING";
+const agendamentoRoutes = require('./routes/agendamento');
+const connectionString = "mongodb+srv://user-1:user1pass@cluster0.1w3ls.mongodb.net/barbearia-db?retryWrites=true&w=majorityg";
 
 mongoose.connect(connectionString);
 
@@ -36,6 +36,7 @@ app.get("/", (req, res) => {
 // routes
 app.use('/login', loginRoutes);
 app.use('/register', registerRoutes);
+app.use('/agendamento', agendamentoRoutes);
 // Use checktoken middlaware for admin routes
 // app.use('/message', middlewares.checkToken, messageRoutes);
 
