@@ -1,15 +1,16 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const app = express();
-const mongoose = require("mongoose");
-const middlewares = require('./routes/middlewares');
-const loginRoutes = require('./routes/login');
-const registerRoutes = require('./routes/register');
-const agendamentoRoutes = require('./routes/agendamento');
-const connectionString = "mongodb+srv://user-1:user1pass@cluster0.1w3ls.mongodb.net/barbearia-db?retryWrites=true&w=majorityg";
+const express = require("express"),
+  bodyParser = require("body-parser"),
+  app = express(),
+  cors = require("cors"),
+  mongoose = require("mongoose"),
+  routes = require("./routes/main"),
+  configs = require("./configs/index")
 
-mongoose.connect(connectionString);
+mongoose.connect(configs.mongodb.connectionString);
 
+routes(app);
+
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
@@ -27,18 +28,6 @@ app.use(function (req, res, next) {
   );
   next();
 });
-
-app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/index.html");
-});
-
-
-// routes
-app.use('/login', loginRoutes);
-app.use('/register', registerRoutes);
-app.use('/agendamento', agendamentoRoutes);
-// Use checktoken middlaware for admin routes
-// app.use('/message', middlewares.checkToken, messageRoutes);
 
 
 app.listen(3000, () => {
