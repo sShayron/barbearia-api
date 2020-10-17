@@ -3,6 +3,7 @@
 const jwt = require('jsonwebtoken'),
     bcrypt = require('bcryptjs'),
     User = require('../models/user'),
+    handleTokenValidate = require("../helpers/handleTokenValidate"),
     configs = require('../configs/index');
 
 exports.register = async (req, res) => {
@@ -16,8 +17,6 @@ exports.register = async (req, res) => {
                 return res.status(configs.httpStatus.internalServerError)
                     .send(configs.requestResponse(false, err, configs.responseMessages.internalServerError));
             }
-        
-            const expiresIn = 24 * 60 * 60;
 
             const accessToken = jwt.sign(
               {
@@ -25,7 +24,7 @@ exports.register = async (req, res) => {
               },
               config.secret,
               {
-                expiresIn: expiresIn,
+                expiresIn: handleTokenValidate(),
               }
             );
 
@@ -64,13 +63,11 @@ exports.login = async (req, res) => {
                     configs.requestResponse(false, null, configs.responseMessages.authFailed)
                 );
             }
-        
-            const expiresIn = 24 * 60 * 60;
-
+    
             const accessToken = jwt.sign({
               id: user._id
             }, configs.authToken.secret, {
-                expiresIn: expiresIn
+                expiresIn: handleTokenValidate(),
             });
         
             const displayUser = {
