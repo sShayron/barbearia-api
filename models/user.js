@@ -3,11 +3,11 @@ const mongooseUniqueValidator = require("mongoose-unique-validator");
 const createSchema = require("./createSchema");
 
 var userSchema = createSchema({
-  nome: {
+  name: {
     type: String,
     required: true,
   },
-  senha: {
+  password: {
     type: String,
     required: true,
   },
@@ -16,18 +16,18 @@ var userSchema = createSchema({
     required: true,
     unique: true,
   },
-  genero: {
+  genre: {
     type: String,
     required: false,
   },
-  endereco: {
+  address: {
     type: String,
     required: false,
   },
-  // messages: [{
-  //   type: Schema.Types.ObjectId,
-  //   ref: 'Message'
-  // }]
+  isBarber: {
+    type: Boolean,
+    required: true
+  }
 });
 
 userSchema.plugin(mongooseUniqueValidator);
