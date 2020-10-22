@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken'),
     handleTokenValidate = require("../helpers/handleTokenValidate"),
     configs = require('../configs/index');
 
-exports.register = async (req, res) => {
+exports.register = async function (req, res) {
     try {
         const { name, password, email, genre, address, isBarber } = req.body;
 
@@ -45,7 +45,7 @@ exports.register = async (req, res) => {
     }
 }
 
-exports.login = async (req, res) => {
+exports.login = async function (req, res) {
     try {
         const { password, email } = req.body;
 
