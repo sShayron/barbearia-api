@@ -1,13 +1,13 @@
+require('dotenv').config();
+
 const express = require("express"),
   bodyParser = require("body-parser"),
   app = express(),
   cors = require("cors"),
   mongoose = require("mongoose"),
-  routes = require("./routes/main"),
-  configs = require("./configs/index")
+  routes = require("./routes/main")
 
-mongoose.connect(configs.mongodb.connectionString);
-
+mongoose.connect(process.env.MONGO_CONNECTION_STRING);
 routes(app);
 
 app.use(cors());
