@@ -4,9 +4,6 @@ module.exports = {
     authToken: {
         secret: "whatever"
     },
-    mongodb: {
-        connectionString: "mongodb://localhost:27017/barbearia"
-    },
     httpStatus: {
         ok: 200,
         badRequest: 400,
