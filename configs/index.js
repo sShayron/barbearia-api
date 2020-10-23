@@ -15,14 +15,14 @@ module.exports = {
     },
     routes: {
         scheduling: {
-            create: "/api/scheduling/create",
-            delete: "/api/scheduling/delete",
-            getAll: "/api/scheduling",
-            getById: "/api/scheduling/:id"
+            create: "/api/barber/scheduling/create",
+            delete: "/api/barber/scheduling/delete",
+            getAll: "/api/barber/scheduling",
+            getById: "/api/barber/scheduling/:id"
         },
         auth: {
-            login: "/api/login",
-            register: "/api/register"
+            login: "/api/common/login",
+            register: "/api/common/register"
         }
     },
     responseMessages: {

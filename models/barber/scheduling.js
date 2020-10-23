@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const createSchema = require("./createSchema");
+const createSchema = require("../createSchema");
 
 const schedulingSchema = createSchema({
     barber: {

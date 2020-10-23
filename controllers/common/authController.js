@@ -2,13 +2,12 @@
 
 const jwt = require('jsonwebtoken'),
     bcrypt = require('bcryptjs'),
-    User = require('../models/user'),
-    handleTokenValidate = require("../helpers/handleTokenValidate"),
-    configs = require('../configs/index');
+    User = require('../../models/common/user'),
+    handleTokenValidate = require("../../helpers/handleTokenValidate"),
+    configs = require('../../configs/index');
 
 exports.register = function (req, res) {
     try {
-        console.log('request,', req.body);
         const { name, password, email, genre, address, isBarber } = req.body;
 
         const user = new User({ name, email, genre, address, isBarber, password: bcrypt.hashSync(password) });

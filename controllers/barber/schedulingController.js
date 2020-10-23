@@ -1,7 +1,7 @@
 'use strict';
 
-const configs = require("../configs/index"),
-    Scheduling = require("../models/scheduling");
+const configs = require("../../configs/index"),
+    Scheduling = require("../../models/barber/scheduling");
 
 exports.createScheduling = async (req, res) => {
     try {

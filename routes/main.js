@@ -5,8 +5,8 @@ const configs = require("../configs/index"),
     router = express.Router();
 
 module.exports = (app) => {
-    const schedulingController = require("../controllers/schedulingController"),
-        authController = require("../controllers/authController");
+    const schedulingController = require("../controllers/barber/schedulingController"),
+        authController = require("../controllers/common/authController");
 
     //scheduling routes
     router.post(configs.routes.scheduling.create, schedulingController.createScheduling);
