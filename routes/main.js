@@ -1,7 +1,7 @@
 'use strict';
 
 const configs = require("../configs/index"),
-    express = require("express");
+    express = require("express"),
     router = express.Router();
 
 module.exports = (app) => {
@@ -9,7 +9,7 @@ module.exports = (app) => {
         authController = require("../controllers/authController");
 
     //scheduling routes
-    /*router.post(configs.routes.scheduling.create, schedulingController.createScheduling);
+    router.post(configs.routes.scheduling.create, schedulingController.createScheduling);
 
     app.route(configs.routes.scheduling.delete)
         .delete(schedulingController.deleteScheduling);
@@ -22,7 +22,7 @@ module.exports = (app) => {
 
     //auth routes
     app.route(configs.routes.auth.login)
-        .post(authController.login);*/
-    
-    app.use(configs.routes.auth.register, router.post(configs.routes.auth.register, authController.register));
+        .post(authController.login);
+
+    app.route(configs.routes.auth.register).post(authController.register)
 ;}

@@ -6,8 +6,9 @@ const jwt = require('jsonwebtoken'),
     handleTokenValidate = require("../helpers/handleTokenValidate"),
     configs = require('../configs/index');
 
-exports.register = async function (req, res) {
+exports.register = function (req, res) {
     try {
+        console.log('request,', req.body);
         const { name, password, email, genre, address, isBarber } = req.body;
 
         const user = new User({ name, email, genre, address, isBarber, password: bcrypt.hashSync(password) });
@@ -22,26 +23,24 @@ exports.register = async function (req, res) {
               {
                 id: result._id,
               },
-              config.secret,
+              configs.authToken.secret,
               {
                 expiresIn: handleTokenValidate(),
               }
             );
 
             const displayUser = {
-                ...user,
-                password: ""
+                ...user._doc
             }
 
             return res.status(configs.httpStatus.ok).send(
-                configs.authResponse(true, displayUser, configs.responseMessages.registerOk, accessToken, expiresIn)
+                configs.authResponse(true, displayUser, configs.responseMessages.registerOk, accessToken, handleTokenValidate())
             );
         });
 
 
     } catch(err) {
-        return res.status(configs.httpStatus.internalServerError)
-            .send(configs.requestResponse(false, err, configs.responseMessages.internalServerError));
+        throw new Error(String(err));
     }
 }
 
@@ -83,6 +82,6 @@ exports.login = async function (req, res) {
 
     } catch(err) {
         return res.status(configs.httpStatus.internalServerError)
-            .send(configs.requestResponse(false, err, configs.responseMessages.internalServerError));
+            .send(configs.requestResponse(false, String(err), configs.responseMessages.internalServerError));
     }
 }
